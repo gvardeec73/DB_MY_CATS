@@ -2,22 +2,73 @@ import java.sql.*;
 import java.sql.SQLException;
 public class Main {
 
-    public static void createNewTable(String url) {
-        // SQLite connection string
+    static String[] types = new String[]{
+            "Абиссинская кошка",
+            "Австралийский мист",
+            "Американская жесткошерстная",
+            "Американская короткошерстная",
+            "Американский бобтейл",
+            "Американский кёрл",
+            "Балинезийская кошка",
+            "Бенгальская кошка",
+            "Бирманская кошка",
+            "Бомбейская кошка",
+            "Бразильская короткошёрстная",
+            "Британская длинношерстная",
+            "Британская короткошерстная",
+            "Бурманская кошка",
+            "Бурмилла кошка",
+            "Гавана",
+            "Гималайская кошка",
+            "Девон-рекс",
+            "Донской сфинкс",
+            "Европейская короткошерстная",
+            "Египетская мау",
+            "Канадский сфинкс",
+            "Кимрик",
+            "Корат",
+            "Корниш-рекс",
+            "Курильский бобтейл",
+            "Лаперм",
+            "Манчкин",
+            "Мейн-ку́н",
+            "Меконгский бобтейл",
+            "Мэнкс кошка",
+            "Наполеон",
+            "Немецкий рекс",
+            "Нибелунг",
+            "Норвежская лесная кошка",
+            "Ориентальная кошка",
+            "Оцикет",
+            "Персидская кошка",
+            "Петерболд",
+            "Пиксибоб",
+            "Рагамаффин",
+            "Русская голубая кошка",
+            "Рэгдолл",
+            "Саванна",
+            "Селкирк-рекс",
+            "Сиамская кошка",
+            "Сибирская кошка",
+            "Сингапурская кошка",
+            "Скоттиш-фолд",
+            "Сноу-шу",
+            "Сомалийская кошка",
+            "Тайская кошка",
+            "Тойгер",
+            "Тонкинская кошка",
+            "Турецкая ангорская кошка",
+            "Турецкий ван",
+            "Украинский левкой",
+            "Чаузи",
+            "Шартрез",
+            "Экзотическая короткошерстная",
+            "Японский бобтейл"
+    };
 
-
-        // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS types (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	type varchar(100) NOT NULL\n"
-                + ");";
-
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement()) {
-            // create a new table
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    static void add_all_types() throws SQLException {
+        for (int i = 0; i < types.length; i++) {
+            DB_Connection.insert_type(types[i]);
         }
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
@@ -25,8 +76,7 @@ public class Main {
         String DB_URL = "jdbc:sqlite:D:" + fileName;
         DB_Connection.Connect(DB_URL);
         DB_Connection.CreateDBTable();
-        DB_Connection.insert_type("Абиссинская кошка");
-        DB_Connection.insert_type("Австралийский мист");
-        DB_Connection.insert_type("Американская жесткошерстная");
+        add_all_types();
+
     }
 }

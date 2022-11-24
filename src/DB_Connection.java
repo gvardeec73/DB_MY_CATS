@@ -9,7 +9,7 @@ public class DB_Connection {
     public static void Connect(String DB_URL) throws ClassNotFoundException, SQLException
     {
         connection = null;
-        Class.forName("org.sqlite.JDBC");
+        //Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection(DB_URL);
         if (connection != null) {
             DatabaseMetaData meta = connection.getMetaData();
