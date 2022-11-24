@@ -76,7 +76,10 @@ public class Main {
         String DB_URL = "jdbc:sqlite:D:" + fileName;
         DB_Connection.Connect(DB_URL);
         DB_Connection.CreateDBTable();
-        add_all_types();
+       // add_all_types();
+       // DB_Connection.delete_type(40);
+        DB_Connection.update_type(41,"Неизвестная порода");
+        DB_Connection.CloseDB();
 
     }
 }

@@ -33,12 +33,33 @@ public class DB_Connection {
         System.out.println("Таблица создана или уже существует.");
     }
 
-    // --------Заполнение таблицы--------
+    // --------Заполнение строки таблицы--------
     public static void  insert_type(String type) throws SQLException
     {
         String sql = "INSERT INTO types (type) VALUES ('" + type + "');";
         statement.execute(sql);
 
         System.out.println("строка заполнена");
+    }
+    // --------Удаление строки таблицы--------
+    public static void delete_type(int id) throws SQLException {
+        String sql ="DELETE FROM types WHERE id = " + id + ";";
+        statement.execute(sql);
+        System.out.println("строка удалена");
+    }
+    // --------Замена строки таблицы--------
+    public static void update_type(int id, String new_type) throws SQLException {
+        String sql ="UPDATE types SET type = '" + new_type + "' WHERE id = " + id + ";";
+        statement.execute(sql);
+        System.out.println("строка заменена");
+    }
+    // --------Закрытие--------
+    public static void CloseDB() throws ClassNotFoundException, SQLException
+    {
+        connection.close();
+        statement.close();
+       // resultSet.close();
+
+        System.out.println("Соединения закрыты");
     }
 }
