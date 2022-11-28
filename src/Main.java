@@ -75,7 +75,8 @@ public class Main {
         String fileName = "My_cats.db";
         String DB_URL = "jdbc:sqlite:D:" + fileName;
         DB_Connection.Connect(DB_URL);
-        DB_Connection.CreateDBTable();
+        DB_Connection.CreateDBTableTypes();
+        DB_Connection.CreateDBTableCats();
        // add_all_types();
        // DB_Connection.delete_type(40);
        // DB_Connection.get_type(19);
@@ -83,8 +84,8 @@ public class Main {
         //DB_Connection.update_type(41,"Неизвестная порода");
        // DB_Connection.get_type_where("id > 15 AND id < 40");
        // DB_Connection.get_type_where("type LIKE 'Б%'");
-        DB_Connection.get_all_types();
-        DB_Connection.CloseDB();
+        //DB_Connection.get_all_types();
+       DB_Connection.CloseDB();
 
     }
 }

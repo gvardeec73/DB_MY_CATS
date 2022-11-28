@@ -16,13 +16,13 @@ public class DB_Connection {
             System.out.println("The driver name is " + meta.getDriverName());
             System.out.println("База Подключена!");
         }
-
+        statement = connection.createStatement();
     }
 
     // --------Создание таблицы--------
-    public static void CreateDBTable() throws ClassNotFoundException, SQLException
+    public static void CreateDBTableTypes() throws ClassNotFoundException, SQLException
     {
-        statement = connection.createStatement();
+
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS types (\n"
                 + "	id integer PRIMARY KEY,\n"
@@ -30,9 +30,23 @@ public class DB_Connection {
                 + ");";
         statement.execute(sql);
 
-        System.out.println("Таблица создана или уже существует.");
+        System.out.println("Таблица types создана или уже существует.");
     }
+    public static void CreateDBTableCats() throws ClassNotFoundException, SQLException
+    {
+       // statement = connection.createStatement();
+        // SQL statement for creating a new table
+        String sql = "CREATE TABLE IF NOT EXISTS cats (\n"
+                + "	id integer PRIMARY KEY UNIQUE,\n"
+                + "	name varchar(20) NOT NULL,\n"
+                + "	type_id integer REFERENCES types(id) NOT NULL,\n"
+                + "	age integer NOT NULL,\n"
+                + "	weight double\n"
+                + ");";
+        statement.execute(sql);
 
+        System.out.println("Таблица cats создана или уже существует.");
+    }
     // --------Заполнение строки таблицы--------
     public static void  insert_type(String type) throws SQLException
     {
@@ -84,7 +98,7 @@ public class DB_Connection {
     {
         connection.close();
         statement.close();
-        resultSet.close();
+       // resultSet.close();
 
         System.out.println("Соединения закрыты");
     }
