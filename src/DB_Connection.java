@@ -5,6 +5,9 @@ public class DB_Connection {
     public static Statement statement;
     public static ResultSet resultSet;
 
+
+
+
     // --------ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ--------
     public static void Connect(String DB_URL) throws ClassNotFoundException, SQLException
     {
