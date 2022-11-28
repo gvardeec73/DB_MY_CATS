@@ -17,6 +17,7 @@ public class DB_Connection {
             System.out.println("База Подключена!");
         }
         statement = connection.createStatement();
+       // statement =  connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
 
     // --------Создание таблицы--------
@@ -74,16 +75,6 @@ public class DB_Connection {
         String type = resultSet.getString("type");
         System.out.println(type);
     }
-
-    public static void get_all_types() throws SQLException {
-        String sql ="SELECT * FROM types;";
-        resultSet = statement.executeQuery(sql);
-        while(resultSet.next()) {
-            String type = resultSet.getString("type");
-            System.out.println(type);
-        }
-    }
-
     public static void get_type_where(String where) throws SQLException {
         String sql ="SELECT type FROM types WHERE " + where + ";";
         resultSet = statement.executeQuery(sql);
@@ -93,13 +84,43 @@ public class DB_Connection {
         }
     }
 
+    public static void insert_cat(String name, String type, int age, Double weight) throws SQLException {
+        String sql ="SELECT type FROM types WHERE type = '" + type + "';";
+        resultSet = statement.executeQuery(sql);
+        resultSet.next();
+        String typeFromDB = resultSet.getString("type");
+       // System.out.println(typeFromDB);
+        if (typeFromDB == null) {
+            System.out.println("Такого типа кошки нет в базе (" + type + ")");
+            insert_type(type);
+            System.out.println("Тип " + type + " добавлен в базу");
+        }
+         sql = "INSERT INTO cats (name, type_id, age, weight) VALUES \n" +
+                "('" + name + "', (SELECT id FROM types WHERE type = '" + type + "')," + age + "," + weight +" );";
+        statement.execute(sql);
+
+        System.out.println("строка заполнена");
+    }
+    public static void get_all_types() throws SQLException {
+        String sql ="SELECT * FROM types;";
+        resultSet = statement.executeQuery(sql);
+        while(resultSet.next()) {
+            String type = resultSet.getString("type");
+            System.out.println(type);
+        }
+
+    }
+
+
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException
     {
-        connection.close();
-        statement.close();
-       // resultSet.close();
-
+        if(resultSet != null)
+            resultSet.close();
+        if(statement != null)
+            statement.close();
+        if(connection != null)
+            connection.close();
         System.out.println("Соединения закрыты");
     }
 }
