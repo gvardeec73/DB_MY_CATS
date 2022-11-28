@@ -53,12 +53,38 @@ public class DB_Connection {
         statement.execute(sql);
         System.out.println("строка заменена");
     }
+
+    public static void get_type(int id) throws SQLException {
+        String sql ="SELECT type FROM types WHERE id = " + id + ";";
+        resultSet = statement.executeQuery(sql);
+        String type = resultSet.getString("type");
+        System.out.println(type);
+    }
+
+    public static void get_all_types() throws SQLException {
+        String sql ="SELECT * FROM types;";
+        resultSet = statement.executeQuery(sql);
+        while(resultSet.next()) {
+            String type = resultSet.getString("type");
+            System.out.println(type);
+        }
+    }
+
+    public static void get_type_where(String where) throws SQLException {
+        String sql ="SELECT type FROM types WHERE " + where + ";";
+        resultSet = statement.executeQuery(sql);
+        while(resultSet.next()) {
+            String type = resultSet.getString("type");
+            System.out.println(type);
+        }
+    }
+
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException
     {
         connection.close();
         statement.close();
-       // resultSet.close();
+        resultSet.close();
 
         System.out.println("Соединения закрыты");
     }

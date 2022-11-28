@@ -78,7 +78,12 @@ public class Main {
         DB_Connection.CreateDBTable();
        // add_all_types();
        // DB_Connection.delete_type(40);
-        DB_Connection.update_type(41,"Неизвестная порода");
+       // DB_Connection.get_type(19);
+       // DB_Connection.get_type(10);
+        //DB_Connection.update_type(41,"Неизвестная порода");
+       // DB_Connection.get_type_where("id > 15 AND id < 40");
+       // DB_Connection.get_type_where("type LIKE 'Б%'");
+        DB_Connection.get_all_types();
         DB_Connection.CloseDB();
 
     }
