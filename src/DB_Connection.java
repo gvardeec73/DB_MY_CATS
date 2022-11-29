@@ -2,8 +2,8 @@ import java.sql.*;
 
 public class DB_Connection {
     public static Connection connection;
-    public static Statement statement;
-    public static ResultSet resultSet;
+    public static Statement statement,statement2;
+    public static ResultSet resultSet, resultSet2;
 
 
 
@@ -20,6 +20,7 @@ public class DB_Connection {
             System.out.println("База Подключена!");
         }
         statement = connection.createStatement();
+        statement2 = connection.createStatement();
        // statement =  connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
 
@@ -130,8 +131,59 @@ public class DB_Connection {
         }
 
     }
+    public static void get_cat(int id) throws SQLException {
+        String sql ="SELECT * FROM cats WHERE id = " + id + ";";
+        resultSet = statement.executeQuery(sql);
+        while(resultSet.next()) {
+            String readID = resultSet.getString("id");
+            String name = resultSet.getString("name");
+            String type_id = resultSet.getString("type_id");
+            String age = resultSet.getString("age");
+            String weight = resultSet.getString("weight");
+            String sql2 ="SELECT type FROM types WHERE id = '" + type_id + "';";
+            resultSet2 = statement.executeQuery(sql2);
+            resultSet2.next();
+            String typeFromDB = resultSet2.getString("type");
+            System.out.println(readID + " " + name + " " + typeFromDB + " " + age + " " + weight);
+        }
 
+    }
 
+    public static void get_cat_where(String where) throws SQLException {
+        String sql ="SELECT * FROM cats WHERE " + where + ";";
+        resultSet = statement.executeQuery(sql);
+        while(resultSet.next()) {
+            String readID = resultSet.getString("id");
+            String name = resultSet.getString("name");
+            String type_id = resultSet.getString("type_id");
+            String age = resultSet.getString("age");
+            String weight = resultSet.getString("weight");
+            String sql2 ="SELECT type FROM types WHERE id = '" + type_id + "';";
+            resultSet2 = statement2.executeQuery(sql2);
+            resultSet2.next();
+            String typeFromDB = resultSet2.getString("type");
+            System.out.println(readID + " " + name + " " + typeFromDB + " " + age + " " + weight);
+        }
+
+    }
+
+    public static void get_all_cats() throws SQLException {
+        String sql ="SELECT * FROM cats;";
+        resultSet = statement.executeQuery(sql);
+        while(resultSet.next()) {
+            String readID = resultSet.getString("id");
+            String name = resultSet.getString("name");
+            String type_id = resultSet.getString("type_id");
+            String age = resultSet.getString("age");
+            String weight = resultSet.getString("weight");
+            String sql2 ="SELECT type FROM types WHERE id = '" + type_id + "';";
+            resultSet2 = statement2.executeQuery(sql2);
+            resultSet2.next();
+            String typeFromDB = resultSet2.getString("type");
+            System.out.println(readID + " " + name + " " + typeFromDB + " " + age + " " + weight);
+        }
+
+    }
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException
     {

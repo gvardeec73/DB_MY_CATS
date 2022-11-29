@@ -234,7 +234,10 @@ public class Main {
        // add_more_cats(5000);
        // DB_Connection.delete_cat(5001);
        // DB_Connection.delete_cat("name LIKE 'А%'");
-        DB_Connection.update_cat("name = 'Леопард' , age = 5","id = 4997");
+       // DB_Connection.update_cat("name = 'Леопард' , age = 5","id = 4997");
+       // DB_Connection.get_cat(4964);
+      //  DB_Connection.get_cat_where("name LIKE 'М%'");
+        DB_Connection.get_all_cats();
         DB_Connection.CloseDB();
 
 
