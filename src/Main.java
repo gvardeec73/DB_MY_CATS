@@ -226,12 +226,15 @@ public class Main {
        // DB_Connection.get_type(10);
         //DB_Connection.update_type(41,"Неизвестная порода");
        // DB_Connection.get_type_where("id > 15 AND id < 40");
-       // DB_Connection.get_type_where("type LIKE 'Б%'");
+        // DB_Connection.get_type_where("type LIKE 'Б%'");
         //DB_Connection.get_all_types();
   //      DB_Connection.insert_cat("Барсик","Камышовый кот",2,3.2);
    //     DB_Connection.insert_cat("Дружок","Корат",5,6.5);
    //     DB_Connection.insert_cat("Батон","Рыжий кот",3,1.2);
-        add_more_cats(5000);
+       // add_more_cats(5000);
+       // DB_Connection.delete_cat(5001);
+       // DB_Connection.delete_cat("name LIKE 'А%'");
+        DB_Connection.update_cat("name = 'Леопард' , age = 5","id = 4997");
         DB_Connection.CloseDB();
 
 

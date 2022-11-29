@@ -65,13 +65,30 @@ public class DB_Connection {
         statement.execute(sql);
         System.out.println("строка удалена");
     }
+
+    public static void delete_cat(int id) throws SQLException {
+        String sql ="DELETE FROM cats WHERE id = " + id + ";";
+        statement.execute(sql);
+        System.out.println("котик удален");
+
+    }
+
+    public static void delete_cat(String where) throws SQLException {
+        String sql ="DELETE FROM cats WHERE " + where + ";";
+        statement.execute(sql);
+        System.out.println("котик удален");
+    }
     // --------Замена строки таблицы--------
     public static void update_type(int id, String new_type) throws SQLException {
         String sql ="UPDATE types SET type = '" + new_type + "' WHERE id = " + id + ";";
         statement.execute(sql);
         System.out.println("строка заменена");
     }
-
+    public static void update_cat(String set, String where) throws SQLException {
+        String sql ="UPDATE cats SET " + set + " WHERE " + where + ";";
+        statement.execute(sql);
+        System.out.println("котик заменен");
+    }
     public static void get_type(int id) throws SQLException {
         String sql ="SELECT type FROM types WHERE id = " + id + ";";
         resultSet = statement.executeQuery(sql);
